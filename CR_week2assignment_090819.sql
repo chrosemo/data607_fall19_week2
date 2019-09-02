@@ -2,6 +2,7 @@
 DATA 607: Week 2 Assignment - SQL and R
 C. Rosemond 090819
 PostgreSQL
+dbname: data607fall19
 */
 
 --Creating table for movie ratings
