@@ -1,0 +1,52 @@
+---
+title: "Data 607: Week 2 Assignment - SQL and R"
+author: "C. Rosemond 090819"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load RPostgres and DBI packages
+
+I load the RPostgres and DBI packages to enable connection to a local PostgreSQL database.
+
+```{r load}
+library(RPostgres)
+library(DBI)
+```
+
+## Connect to database and check connection
+
+I set my password then connect to a local PostgreSQL database. I then check the connection by listing the tables within the database.
+
+```{r connect}
+pw <- ''
+connect <- dbConnect(RPostgres::Postgres(),
+                 dbname = 'data607fall19',
+                 host = 'localhost',
+                 port = 5432,
+                 user = 'postgres',
+                 password = pw)
+rm(pw)
+dbListTables(connect)
+```
+
+## Read in table with movie ratings by critic
+
+I read in the ratings table, which contains movie ratings from 10 critics, and assign it to an object, also called ratings. I then check the object.
+
+Movies ("column", Title):
+  "endgame", Avengers: Endgame
+  "midsommar", Midsommar
+  "lion_king", The Lion King
+  "john_wick3", John Wick: Chapter 3 - Parabellum
+  "last_sf", The Last Black Man in San Francisco
+  "once_hollywood", Once Upon a Time in Hollywood
+
+```{r read}
+ratings <- dbReadTable(connect, "ratings")
+str(ratings)
+ratings
+```

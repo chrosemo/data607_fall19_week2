@@ -1,0 +1,45 @@
+---
+title: "Data 607 - Week 2 Lab"
+author: "C. Rosemond 090219"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load requisite packages
+
+I load the RPostgres and DBI packages.
+
+```{r load}
+library(RPostgres)
+library(DBI)
+```
+
+## Connect to database and check connection
+
+I set my password then connect to a local PostgreSQL database. I then check the connection by listing the tables within the database.
+
+```{r connect}
+pw <- ''
+connect <- dbConnect(RPostgres::Postgres(),
+                 dbname = 'data607fall19',
+                 host = 'localhost',
+                 port = 5432,
+                 user = 'postgres',
+                 password = pw)
+rm(pw)
+dbListTables(connect)
+```
+
+## Read in table with tuberculosis rates by country by year
+
+I read in the tb_rate table, which contains tuberculosis rates by country by year, and assign it to an object, also called tb_rate. The rates are in percentage points, e.g., in 1997, Afghanistan had a tuberculosis rate of 0.001 percent. I then check the first and last six rows.
+
+```{r read}
+tb_rate <- dbReadTable(connect, "tb_rate")
+str(tb_rate)
+head(tb_rate)
+tail(tb_rate)
+```
