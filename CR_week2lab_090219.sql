@@ -2,6 +2,7 @@
 DATA 607: Lab 2.3 - Combining Data From Multiple Sources
 C. Rosemond 090219
 PostgreSQL
+dbname: data607fall19
 */
 
 --Tuberculosis
